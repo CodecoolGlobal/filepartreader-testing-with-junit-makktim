@@ -1,19 +1,23 @@
+import java.util.List;
 
 public class FileWordAnalyzer {
+
 
     public FileWordAnalyzer(FilePartReader FilePartReader){
 
     }
 
-    public void setup(String filePath, int fromLine, int toLine ) throws IllegalArgumentException{
+    public List getWordsOrderedAlphabetically(){
+
+        return null;
+    }
+
+    public List getWordsContainingSubstring(String subString ){
+        return null;
 
     }
 
-    public String read(){
-
-    }
-
-    public String readLines(){
-
+    public List getStringsWhichPalindromes(){
+        return null;
     }
 }
