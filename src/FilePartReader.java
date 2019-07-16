@@ -1,11 +1,15 @@
 import java.io.File;
+import java.nio.file.Files;
 import java.util.Scanner;
 
 
 public class FilePartReader  {
 
 
-    private String filePath = ("/home/timi/Codecool/3oop/5_si_week/filePractice/src/practice.txt");
+//    private String filePath = ("/home/timi/Codecool/3oop/5_si_week/filePractice/src/practice.txt");
+    private String filePath;
+    private Integer fromLine;
+    private Integer toLine;
 
 
     public FilePartReader() {
@@ -13,38 +17,29 @@ public class FilePartReader  {
     }
 
 
-    public void setup(String filePath, int fromLine, int toLine ) throws IllegalArgumentException{
-
-        try{
-            File file = new File(filePath);
-            Scanner scan = new Scanner(file);
-            while(scan.hasNextLine()) {
-                System.out.println(scan.nextLine());
-            }
-            if (toLine < fromLine)
-                throw new IllegalArgumentException("toline smaller than fromline");
-            if (fromLine < 1)
-                throw new IllegalArgumentException("fromline smaller than 1");
-
+    public void setup(String filePath, Integer fromLine, Integer toLine ) throws IllegalArgumentException{
+        if(toLine < fromLine || fromLine < 1){
+            throw new IllegalArgumentException();
         }
-        catch (Exception scan){
-            System.out.println("");
-        }
+        this.filePath = filePath;
+        this.fromLine = fromLine;
+        this.toLine = toLine;
     }
 
-    public void read(){
-        setup(filePath,0,100);
-        Scanner scan = new Scanner(filePath);
-        while(scan.hasNextLine()){
-            System.out.println(scan.nextLine());
-        }
+    public String read(){
+        return new String(Files.readAllBytes(paths.get(filePath)));
 
     }
 
-    public void readLines() {
-        setup(filePath, 0,10);
-        Scanner scan = new Scanner(filePath);
-        System.out.println(scan.hasNextLine());
-
+    public String readLines() {
+      String readTheLines = "";
+      try{
+          readTheLines = read();
+      }catch (IOException e){
+          e.printStackTrace();
+      }
+      Bufferedreader bufferedreader = new BufferedReader(new StringReader(readTheLines));
+      Stream<string> printedLines = bufferedreader.lines().skip(fromLine).limit(toLine);
+      return printedLines.collect(Collectors.joining("\n"));
     }
 }
